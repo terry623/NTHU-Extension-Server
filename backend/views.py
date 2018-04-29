@@ -36,8 +36,8 @@ def loadCourseData():
 
 @app.route('/api/calculateUserGrade', methods=['POST'])
 def calculateUserGrade():
-    print(request.form['stu_no'])
-    print(json.loads(request.form['userGrade']))
+    # print(request.form['stu_no'])
+    # print(json.loads(request.form['userGrade']))
 
     try:
         # response = Course(courseID).loadCourseData()
@@ -47,12 +47,22 @@ def calculateUserGrade():
     return jsonify(response)
 
 
+@app.route('/api/collectionOfCourse', methods=['GET'])
+def collectionOfCourse():
+    try:
+        # response = Course(courseID).loadCourseData()
+        response = {'message': '999'}
+    except:
+        print('All Course Name Error!')
+    return jsonify(response)
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template('index.html')
 
-# TODO:JS 的抓取成績分佈，要把它改成從 Server 這邊抓
+# JS 的抓取成績分佈，要把它改成從 Server 這邊抓
 # function getGradeDistribution(acix, course_no) {
 #   request(
 #     {
