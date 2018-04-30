@@ -51,7 +51,26 @@ def calculateUserGrade():
 def collectionOfCourse():
     try:
         # response = Course(courseID).loadCourseData()
-        response = {'message': '999'}
+        response = {
+            'values':
+            [
+                {
+                    'value': '課程編號1',
+                    'text': '選項1',
+                    'name': '選項詳情1'
+                },
+                {
+                    'value': '課程編號2',
+                    'text': '選項2',
+                    'name': '選項詳情2'
+                },
+                {
+                    'value': '課程編號3',
+                    'text': '選項3',
+                    'name': '選項詳情3'
+                }
+            ]
+        }
     except:
         print('All Course Name Error!')
     return jsonify(response)
