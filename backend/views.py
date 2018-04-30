@@ -76,6 +76,18 @@ def collectionOfCourse():
     return jsonify(response)
 
 
+@app.route('/api/searchByKeyword', methods=['GET'])
+def searchByKeyword():
+    print(request.args.get('keyword'))
+    
+    try:
+        # response = Course(courseID).loadCourseData()
+        response = {'message': 'I receive your keyword ~'}
+    except:
+        print('Search By Keyword Error!')
+    return jsonify(response)
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
