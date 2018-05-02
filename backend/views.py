@@ -47,39 +47,10 @@ def calculateUserGrade():
     return jsonify(response)
 
 
-@app.route('/api/collectionOfCourse', methods=['GET'])
-def collectionOfCourse():
-    try:
-        # response = Course(courseID).loadCourseData()
-        response = {
-            'values':
-            [
-                {
-                    'value': '課程編號1',
-                    'text': '選項1',
-                    'name': '選項詳情1'
-                },
-                {
-                    'value': '課程編號2',
-                    'text': '選項2',
-                    'name': '選項詳情2'
-                },
-                {
-                    'value': '課程編號3',
-                    'text': '選項3',
-                    'name': '選項詳情3'
-                }
-            ]
-        }
-    except:
-        print('All Course Name Error!')
-    return jsonify(response)
-
-
 @app.route('/api/searchByKeyword', methods=['GET'])
 def searchByKeyword():
     print(request.args.get('keyword'))
-    
+
     try:
         # response = Course(courseID).loadCourseData()
         response = {'message': 'I receive your keyword ~'}
@@ -92,6 +63,35 @@ def searchByKeyword():
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template('index.html')
+
+
+# @app.route('/api/collectionOfCourse', methods=['GET'])
+# def collectionOfCourse():
+#     try:
+#         # response = Course(courseID).loadCourseData()
+#         response = {
+#             'values':
+#             [
+#                 {
+#                     'value': '課程編號1',
+#                     'text': '選項1',
+#                     'name': '選項詳情1'
+#                 },
+#                 {
+#                     'value': '課程編號2',
+#                     'text': '選項2',
+#                     'name': '選項詳情2'
+#                 },
+#                 {
+#                     'value': '課程編號3',
+#                     'text': '選項3',
+#                     'name': '選項詳情3'
+#                 }
+#             ]
+#         }
+#     except:
+#         print('All Course Name Error!')
+#     return jsonify(response)
 
 # JS 的抓取成績分佈，要把它改成從 Server 這邊抓
 # function getGradeDistribution(acix, course_no) {
