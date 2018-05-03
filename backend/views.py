@@ -49,7 +49,7 @@ def calculateUserGrade():
 
 @app.route('/api/searchByKeyword', methods=['GET'])
 def searchByKeyword():
-    print(request.args.get('keyword'))
+    # print(request.args.get('keyword'))
 
     try:
         # response = Course(courseID).loadCourseData()
