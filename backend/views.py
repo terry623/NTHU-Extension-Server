@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 from .models import User, Course
+from .sim import loadDataFromSIM
 from flask_cors import CORS
 from random import *
 import json
@@ -7,31 +8,31 @@ app = Flask(__name__)
 cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
 
-@app.route('/api/register', methods=['POST'])
-def register():
-    data = request.get_json()
-    user1 = data['user1']
-    user2 = data['user2']
+# @app.route('/api/register', methods=['POST'])
+# def register():
+#     data = request.get_json()
+#     user1 = data['user1']
+#     user2 = data['user2']
 
-    try:
-        User(user1).add_people(user2)
-        response = {'status': 'Good Job!'}
-    except:
-        print('Register Error!')
-        response = {'status': 'No~~'}
-    return jsonify(response)
+#     try:
+#         User(user1).add_people(user2)
+#         response = {'status': 'Good Job!'}
+#     except:
+#         print('Register Error!')
+#         response = {'status': 'No~~'}
+#     return jsonify(response)
 
 
-@app.route('/api/loadCourseData', methods=['POST'])
-def loadCourseData():
-    data = request.get_json()
-    courseID = data['courseID']
+# @app.route('/api/loadCourseData', methods=['POST'])
+# def loadCourseData():
+#     data = request.get_json()
+#     courseID = data['courseID']
 
-    try:
-        response = Course(courseID).loadCourseData()
-    except:
-        print('Load Course Data Error!')
-    return jsonify(response)
+#     try:
+#         response = Course(courseID).loadCourseData()
+#     except:
+#         print('Load Course Data Error!')
+#     return jsonify(response)
 
 
 @app.route('/api/calculateUserGrade', methods=['POST'])
@@ -47,15 +48,13 @@ def calculateUserGrade():
     return jsonify(response)
 
 
-@app.route('/api/searchByKeyword', methods=['GET'])
-def searchByKeyword():
-    # print(request.args.get('keyword'))
-
+@app.route('/api/getSimilarities', methods=['GET'])
+def getSimilarities():
+    course_id = request.args.get('course_id')
     try:
-        # response = Course(courseID).loadCourseData()
-        response = {'message': 'I receive your keyword ~'}
+        response = loadDataFromSIM(course_id)
     except:
-        print('Search By Keyword Error!')
+        print('Get Similarities Error!')
     return jsonify(response)
 
 
@@ -64,34 +63,6 @@ def searchByKeyword():
 def catch_all(path):
     return render_template('index.html')
 
-
-# @app.route('/api/collectionOfCourse', methods=['GET'])
-# def collectionOfCourse():
-#     try:
-#         # response = Course(courseID).loadCourseData()
-#         response = {
-#             'values':
-#             [
-#                 {
-#                     'value': '課程編號1',
-#                     'text': '選項1',
-#                     'name': '選項詳情1'
-#                 },
-#                 {
-#                     'value': '課程編號2',
-#                     'text': '選項2',
-#                     'name': '選項詳情2'
-#                 },
-#                 {
-#                     'value': '課程編號3',
-#                     'text': '選項3',
-#                     'name': '選項詳情3'
-#                 }
-#             ]
-#         }
-#     except:
-#         print('All Course Name Error!')
-#     return jsonify(response)
 
 # JS 的抓取成績分佈，要把它改成從 Server 這邊抓
 # function getGradeDistribution(acix, course_no) {
