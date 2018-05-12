@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from .models import User, Course
-from .sim import loadDataFromSIM
+from .models import Course
 from flask_cors import CORS
 from random import *
 import json
@@ -41,7 +40,6 @@ def calculateUserGrade():
     # print(json.loads(request.form['userGrade']))
 
     try:
-        # response = Course(courseID).loadCourseData()
         response = {'message': 'I receive your grade ~'}
     except:
         print('Calculate User Grade Error!')
@@ -52,7 +50,8 @@ def calculateUserGrade():
 def getSimilarities():
     course_id = request.args.get('course_id')
     try:
-        response = loadDataFromSIM(course_id)
+        result = Course(courseID).findRelationship()
+        response = result.data()
     except:
         print('Get Similarities Error!')
     return jsonify(response)

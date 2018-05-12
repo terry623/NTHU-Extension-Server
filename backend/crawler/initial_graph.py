@@ -30,7 +30,7 @@ def add_courses():
     query = '''
     LOAD CSV WITH HEADERS FROM {file} AS row
     CREATE (n:Course)
-    SET n = row, n.no = row.no, n.name_zh = row.name_zh, n.name_en = row.name_en
+    SET n = row
     '''
 
     return graph.run(query, file="file:///test.csv")
