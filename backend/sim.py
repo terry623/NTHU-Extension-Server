@@ -19,13 +19,17 @@ def sim_to_csv():
 def csv_to_neo():
     csvToNeo_createNode()
     print('Neo Create Node Finish')
-    all_other_course = pd.read_pickle('data/course_similarities')
-    length = len(all_other_course.index)
-    for row in range(0, length-1):
-        for col in range(0, length-1):
-            if row < 30 and col < 30 and row != col:
-                per = all_other_course.iloc[row, col]
-                csvToNeo_createRel(row, col, per)
+
+    all_course = pd.read_pickle('data/course_similarities')
+    length = len(all_course.index)
+    for col in range(0, length):
+        # if row < 10 and col < 10 and row != col:
+        select = all_course[int(col)]
+        result = select.sort_values(ascending=False).iloc[0:21]
+        for row in list(result.index.values):
+            if(row != col):
+                percent = result.loc[row]
+                csvToNeo_createRel(row.item(), col, percent)
     print('Neo Create Relationship Finish')
 
 
@@ -41,12 +45,13 @@ def csvToNeo_createNode():
 
 
 def csvToNeo_createRel(a, b, per):
-    print('Neo Create Relationship Between', a, 'and', b)
+    # a -> table left, b -> table top
+    print('Neo Create Relationship Between', a, 'and', b, '=>', per)
     query = '''
     MATCH (a:Course),(b:Course)
     WHERE a.course_id = {a_id} AND b.course_id = {b_id}
     CREATE (a)-[r:similarity { percent : {percent} }]->(b)
-    RETURN type(r), r.percent
+    RETURN a.course_id, b.course_id, r.percent
     '''
 
     return graph.run(query, a_id=a, b_id=b, percent=per)
