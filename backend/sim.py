@@ -23,7 +23,6 @@ def csv_to_neo():
     all_course = pd.read_pickle('data/course_similarities')
     length = len(all_course.index)
     for col in range(0, length):
-        # if row < 10 and col < 10 and row != col:
         select = all_course[int(col)]
         result = select.sort_values(ascending=False).iloc[0:21]
         for row in list(result.index.values):
@@ -55,15 +54,3 @@ def csvToNeo_createRel(a, b, per):
     '''
 
     return graph.run(query, a_id=a, b_id=b, percent=per)
-
-
-# def findDataUseTable(course_id):
-
-#     all_other_course = pd.read_pickle(
-#     'data/course_similarities')[int(course_id)]
-#     result = all_other_course.sort_values(ascending=False).iloc[0:10]
-
-#     response = [{'c_id': c_id, 'percent': percent}
-#                 for c_id, percent in zip(result.index.tolist(), result.tolist())]
-
-#     return response

@@ -14,13 +14,13 @@ class Course:
     def findRelationship(self):
         print("Find The Relationship Of", self.course_id)
         query = '''
-        MATCH (a:Course { course_id: {c_id} } )-[r]->(b:Course)
+        MATCH (a:Course { course_id: toInt({c_id}) } )<-[r]-(b:Course)
         WITH {  
-            course: b.course_id, 
+            other: b.course_id, 
             percent: r.percent
-        } AS SIM
-        RETURN SIM
-        ORDER BY SIM.percent DESC
+        } AS sim
+        RETURN sim
+        ORDER BY sim.percent DESC
         LIMIT 10
         '''
 

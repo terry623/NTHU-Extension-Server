@@ -23,7 +23,7 @@ def calculateUserGrade():
 def getSimilarities():
     course_id = request.args.get('course_id')
     try:
-        result = Course(courseID).findRelationship()
+        result = Course(course_id).findRelationship()
         response = result.data()
     except:
         print('Get Similarities Error!')
