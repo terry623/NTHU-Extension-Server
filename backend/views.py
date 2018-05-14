@@ -30,6 +30,58 @@ def getSimilarities():
     return jsonify(response)
 
 
+@app.route('/api/getNewsFromServer', methods=['GET'])
+def getNewsFromServer():
+    try:
+        response = [
+            {
+                'time': 'Today at 5: 42PM',
+                'message': '快要選課了啦嗚嗚'
+            },
+            {
+                'time': 'Yesterday at 12:30AM',
+                'message': '大家要記得選課歐'
+            },
+            {
+                'time': '5 days ago',
+                'message': '不要忘記了啦'
+            },
+            {
+                'time': '7 days ago',
+                'message': '在幹嘛 = ='
+            },
+            {
+                'time': '11 days ago',
+                'message': '你這個垃圾'
+            }
+        ]
+    except:
+        print('Get News From Server Error!')
+    return jsonify(response)
+
+
+@app.route('/api/getCurrentPhase', methods=['GET'])
+def getCurrentPhase():
+    # 0  第 1 次選課
+    # 1  第 1 次選課 log 記錄
+    # 2  第 1 次選課亂數結果
+    # 3  第 2 次選課
+    # 4  第 2 次選課 log 記錄
+    # 5  第 2 次選課結束(已亂數處理)
+    # 6  第 3 次選課
+    # 7  第 3 次選課 log 記錄
+    # 8  第 3 次選課結束(已亂數處理)
+    # 9 加退選開始前(含擋修、衝堂)
+    # 10 加退選 log 記錄
+    # 11 加退選結束(已處理)
+    # 12 停修 log 記錄
+    try:
+        response = {'currentPhase': '5'}
+    except:
+        print('Get Current Phase Error!')
+    return jsonify(response)
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
