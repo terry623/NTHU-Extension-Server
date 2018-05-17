@@ -12,7 +12,7 @@ class Course:
         self.course_id = course_id
 
     def findRelationship(self):
-        print("Find The Relationship Of", self.course_id)
+        # print("Find The Relationship Of", self.course_id)
         query = '''
         MATCH (a:Course { course_id: toInt({c_id}) } )<-[r]-(b:Course)
         WITH {  

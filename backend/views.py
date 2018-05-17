@@ -45,14 +45,6 @@ def getNewsFromServer():
             {
                 'time': '5 days ago',
                 'message': '不要忘記了啦'
-            },
-            {
-                'time': '7 days ago',
-                'message': '在幹嘛 = ='
-            },
-            {
-                'time': '11 days ago',
-                'message': '你這個垃圾'
             }
         ]
     except:
