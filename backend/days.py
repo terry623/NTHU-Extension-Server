@@ -26,7 +26,7 @@ collection = {
 }
 
 # today = date.today()
-today = date(2018, 8, 27)
+today = date(2018, 6, 9)
 
 
 def getCloseDay(pos):
