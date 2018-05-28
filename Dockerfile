@@ -11,9 +11,11 @@ ADD . /app
 # 安裝 requirements.txt 中所列的必要套件
 RUN pip install -r requirements.txt
 
-# 讓 80 連接埠可以從 Docker 容器外部存取
-EXPOSE 80
+# 讓 5000 連接埠可以從 Docker 容器外部存取
+EXPOSE 5000
+
+# 環境變數
+ENV FLASK_APP run.py
 
 # 當 Docker 容器啟動時，自動執行 app.py
-ENTRYPOINT ["python"]
-CMD ["run.py"]
+CMD ["flask","run"]
