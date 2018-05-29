@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, render_template, jsonify, send_file
-# from .models import Course
-# from .search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group
+from backend.models import Course
+# from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group
 from backend.days import getCountDown, getCurrentPhase
 from flask_cors import CORS
 import json
@@ -18,15 +18,16 @@ def testAWS():
     return response
 
 
-# @app.route('/api/getSimilarities', methods=['GET'])
-# def getSimilarities():
-#     course_id = request.args.get('course_id')
-#     try:
-#         result = Course(course_id).findRelationship()
-#         response = result.data()
-#     except:
-#         print('Get Similarities Error!')
-#     return jsonify(response)
+@app.route('/api/getSimilarities', methods=['GET'])
+def getSimilarities():
+    course_id = request.args.get('course_id')
+    try:
+        result = Course(course_id).findRelationship()
+        response = result.data()
+    except:
+        print('Get Similarities Error!')
+    return jsonify(response)
+
 
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
