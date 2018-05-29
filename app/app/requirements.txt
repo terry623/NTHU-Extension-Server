@@ -1,4 +1,3 @@
-Flask
 Flask-Cors
 elasticsearch-dsl
 py2neo

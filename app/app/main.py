@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, jsonify
-from .models import Course
-from .search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group
-from .days import getCountDown, getCurrentPhase
+import os
+from flask import Flask, request, render_template, jsonify, send_file
+# from .models import Course
+# from .search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group
+from backend.days import getCountDown, getCurrentPhase
 from flask_cors import CORS
 import json
 app = Flask(__name__)
@@ -27,18 +28,18 @@ def testAWS():
 #         print('Get Similarities Error!')
 #     return jsonify(response)
 
-# @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
-# def getCurrentStateOfNTHU():
-#     try:
-#         currentphase = getCurrentPhase()
-#         countdown = getCountDown()
-#         response = {
-#             'currentPhase': currentphase,
-#             'countDown': countdown
-#         }
-#     except:
-#         print('Get Current State Of NTHU Error!')
-#     return jsonify(response)
+@app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
+def getCurrentStateOfNTHU():
+    try:
+        currentphase = getCurrentPhase()
+        countdown = getCountDown()
+        response = {
+            'currentPhase': currentphase,
+            'countDown': countdown
+        }
+    except:
+        print('Get Current State Of NTHU Error!')
+    return jsonify(response)
 
 
 # @app.route('/api/searchOnlyKeyword', methods=['GET'])
@@ -93,4 +94,10 @@ def testAWS():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    return render_template('index.html')
+    index_path = os.path.join(app.static_folder, 'index.html')
+    return send_file(index_path)
+
+
+if __name__ == "__main__":
+    # Only for debugging while developing
+    app.run(host='0.0.0.0', debug=True, port=80)
