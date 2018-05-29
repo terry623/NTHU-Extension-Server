@@ -2,3 +2,4 @@ Flask-Cors
 elasticsearch-dsl
 py2neo
 pandas
+certifi

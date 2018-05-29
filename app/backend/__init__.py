@@ -1,7 +1,4 @@
-# from .crawler import add_data, db_to_csv
-# from .sim import sim_to_csv, csv_to_neo
+# from .graph import sim_to_csv, csv_to_neo
 
-# db_to_csv()
-# add_data()
 # sim_to_csv()
 # csv_to_neo()

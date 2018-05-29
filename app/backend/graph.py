@@ -1,6 +1,6 @@
 # import pandas as pd
-# from py2neo import Graph, Node, Relationship
 # import os
+# from py2neo import Graph, Node, Relationship
 
 # folder = os.environ.get('NEO4J_FOLDER')
 # url = os.environ.get('GRAPHENEDB_URL', 'http://localhost:7474')
