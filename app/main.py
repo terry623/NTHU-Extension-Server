@@ -8,16 +8,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
-@app.route('/api/getSimilarities', methods=['GET'])
-def getSimilarities():
-    course_id = request.args.get('course_id')
-    try:
-        response = loadDataFromFile(course_id)
-        # print(response)
-    except:
-        print('Get Similarities Error!')
-    return jsonify(response)
-
 
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
@@ -34,10 +24,21 @@ def getCurrentStateOfNTHU():
     return jsonify(response)
 
 
-@app.route('/api/searchOnlyKeyword', methods=['GET'])
+@app.route('/api/getSimilarities', methods=['GET'])
+def getSimilarities():
+    course_id = request.args.get('course_id')
+    try:
+        response = loadDataFromFile(course_id)
+        # print(response)
+    except:
+        print('Get Similarities Error!')
+    return jsonify(response)
+
+
+@app.route('/api/searchOnlyKeyword', methods=['POST'])
 def searchOnlyKeyword():
-    search_topic = request.args.get('search_topic')
-    keyword = request.args.get('keyword')
+    search_topic = request.form['search_topic']
+    keyword = request.form['keyword']
     try:
         response = toSearchOnlyKeyword(search_topic, keyword)
         # print(response)
@@ -46,11 +47,11 @@ def searchOnlyKeyword():
     return jsonify(response)
 
 
-@app.route('/api/searchDoubleKeyword', methods=['GET'])
+@app.route('/api/searchDoubleKeyword', methods=['POST'])
 def searchDoubleKeyword():
-    search_topic = request.args.get('search_topic')
-    keyword = request.args.get('keyword')
-    other_keyword = request.args.get('other_keyword')
+    search_topic = request.form['search_topic']
+    keyword = request.form['keyword']
+    other_keyword = request.form['other_keyword']
     try:
         response = toSearchDoubleKeyword(search_topic, keyword, other_keyword)
         # print(response)
@@ -59,9 +60,9 @@ def searchDoubleKeyword():
     return jsonify(response)
 
 
-@app.route('/api/searchBySingleCourseNo', methods=['GET'])
+@app.route('/api/searchBySingleCourseNo', methods=['POST'])
 def searchBySingleCourseNo():
-    course_no = request.args.get('course_no')
+    course_no = request.form['course_no']
     try:
         response = toSearchBySingleCourseNo(course_no)
         # print(response)
@@ -70,13 +71,14 @@ def searchBySingleCourseNo():
     return jsonify(response)
 
 
-@app.route('/api/searchByID_Group', methods=['GET'])
+@app.route('/api/searchByID_Group', methods=['POST'])
 def searchByID_Group():
-    id_0 = request.args.get('id_0')
-    id_1 = request.args.get('id_1')
-    id_2 = request.args.get('id_2')
+    id_0 = request.form['id_0']
+    id_1 = request.form['id_1']
+    id_2 = request.form['id_2']
     try:
         response = toSearchByID_Group(id_0, id_1, id_2)
+        course_no = request.form['course_no']
         # print(response)
     except:
         print('Search By ID Group Error!')

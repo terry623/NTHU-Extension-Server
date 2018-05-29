@@ -36,7 +36,7 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
                 "bool": {
                     "must": [
                         {"match": {"課程中文名稱": keyword}},
-                        {"match": {earch_topic: other_keyword}}
+                        {"match": {search_topic: other_keyword}}
                     ]
                 }
             }
@@ -45,6 +45,7 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
     # for hit in response['hits']['hits']:
     #     print(hit['_source']['課程中文名稱'])
     return response
+
 
 def toSearchBySingleCourseNo(course_no):
     print("course_no:", course_no)
