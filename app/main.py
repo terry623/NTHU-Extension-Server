@@ -1,8 +1,8 @@
 import os
 import json
 from flask import Flask, request, render_template, jsonify, send_file
-from backend.models import loadDataFromFile
-from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group
+# from backend.models import loadDataFromFile
+from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group, toSearchTime
 from backend.days import getCountDown, getCurrentPhase
 from flask_cors import CORS
 app = Flask(__name__)
@@ -24,15 +24,15 @@ def getCurrentStateOfNTHU():
     return jsonify(response)
 
 
-@app.route('/api/getSimilarities', methods=['GET'])
-def getSimilarities():
-    course_id = request.args.get('course_id')
-    try:
-        response = loadDataFromFile(course_id)
-        # print(response)
-    except:
-        print('Get Similarities Error!')
-    return jsonify(response)
+# @app.route('/api/getSimilarities', methods=['GET'])
+# def getSimilarities():
+#     course_id = request.args.get('course_id')
+#     try:
+#         response = loadDataFromFile(course_id)
+#         # print(response)
+#     except:
+#         print('Get Similarities Error!')
+#     return jsonify(response)
 
 
 @app.route('/api/searchOnlyKeyword', methods=['POST'])
@@ -57,6 +57,20 @@ def searchDoubleKeyword():
         # print(response)
     except:
         print('Search Double Keyword Error!')
+    return jsonify(response)
+
+
+@app.route('/api/searchTime', methods=['POST'])
+def searchTime():
+    search_topic = request.form['search_topic']
+    keyword = request.form['keyword']
+    time_group = json.loads(request.form['time_group'])
+    print(time_group)
+    try:
+        response = toSearchTime(search_topic, keyword, time_group)
+        # print(response)
+    except:
+        print('Search Time Error!')
     return jsonify(response)
 
 
