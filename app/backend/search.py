@@ -28,6 +28,11 @@ def toSearchOnlyKeyword(search_topic, keyword):
 def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
     print("search_topic:", search_topic, "keyword:",
           keyword, "other_keyword:", other_keyword)
+    
+    match_special = {"match_all": {}}
+    if(keyword != ""):
+        match_special = {"match": {"課程中文名稱": keyword}}
+
     response = client.search(
         index="nthu",
         body={
@@ -35,7 +40,7 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
             "query": {
                 "bool": {
                     "must": [
-                        {"match": {"課程中文名稱": keyword}},
+                        match_special,
                         {"match": {search_topic: other_keyword}}
                     ]
                 }
