@@ -25,12 +25,7 @@ collection = {
     '12': date(2018, 10, 29)
 }
 
-def getCloseDay(pos, time):
-    # FIXME: 處理 today
-    print(time)
-    split = time.split('-')
-    today = date(int(split[0]), int(split[1]), int(split[2]))
-    print(today)
+def getCloseDay(pos, today):
     if pos == 1:
         result = nearest_positive(collection.values(), today)
     else:
@@ -56,16 +51,16 @@ def nearest_negative(items, pivot):
     return close
 
 
-def getCountDown(time):
+def getCountDown(today):
     pos = 1
-    target_day = getCloseDay(pos, time)
+    target_day = getCloseDay(pos, today)
     countdown = (target_day - today).days
     return countdown
 
 
-def getCurrentPhase(time):
+def getCurrentPhase(today):
     pos = 0
-    target_phase = getCloseDay(pos, time)
+    target_phase = getCloseDay(pos, today)
     if target_phase != date(2016, 1, 1):
         currentphase = list(collection.keys())[
             list(collection.values()).index(target_phase)]

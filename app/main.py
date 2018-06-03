@@ -1,6 +1,7 @@
 import os
 import json
 from flask import Flask, request, render_template, jsonify, send_file
+from datetime import date
 # from backend.models import loadDataFromFile
 from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group, toSearchTime
 from backend.days import getCountDown, getCurrentPhase
@@ -11,10 +12,13 @@ cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
-    time = request.form['time']
+    year = request.args.get('year')
+    month = request.args.get('month')
+    day = request.args.get('day')
+    today = date(int(year), int(month), int(day))
     try:
-        currentphase = getCurrentPhase(time)
-        countdown = getCountDown(time)
+        currentphase = getCurrentPhase(today)
+        countdown = getCountDown(today)
         response = {
             'currentPhase': currentphase,
             'countDown': countdown
