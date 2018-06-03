@@ -11,9 +11,10 @@ cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
+    time = request.form['time']
     try:
-        currentphase = getCurrentPhase()
-        countdown = getCountDown()
+        currentphase = getCurrentPhase(time)
+        countdown = getCountDown(time)
         response = {
             'currentPhase': currentphase,
             'countDown': countdown

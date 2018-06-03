@@ -28,7 +28,7 @@ def toSearchOnlyKeyword(search_topic, keyword):
 def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
     print("search_topic:", search_topic, "keyword:",
           keyword, "other_keyword:", other_keyword)
-    
+
     match_special = {"match_all": {}}
     if(keyword != ""):
         match_special = {"match": {"課程中文名稱": keyword}}
@@ -55,6 +55,10 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
 def toSearchTime(search_topic, keyword, time_group):
     print("search_topic:", search_topic, "keyword:",
           keyword, "time_group:", time_group)
+
+    match_special = {"match_all": {}}
+    if(keyword != ""):
+        match_special = {"match": {"課程中文名稱": keyword}}
 
     all_time = ["M1", "M2", "M3", "M4", "Mn", "M5",
                 "M6", "M7", "M8", "M9", "Ma", "Mb", "Mc",
@@ -85,7 +89,7 @@ def toSearchTime(search_topic, keyword, time_group):
             "query": {
                 "bool": {
                     "must": [
-                        {"match": {"課程中文名稱": keyword}}
+                        match_special
                     ],
                     "should": should_group,
                     "minimum_should_match": 1,
