@@ -2,7 +2,7 @@ import os
 import json
 from flask import Flask, request, render_template, jsonify, send_file
 from datetime import date
-# from backend.models import loadDataFromFile
+from backend.models import loadDataFromFile
 from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group, toSearchTime
 from backend.days import getCountDown, getCurrentPhase
 from flask_cors import CORS
@@ -29,15 +29,15 @@ def getCurrentStateOfNTHU():
     return jsonify(response)
 
 
-# @app.route('/api/getSimilarities', methods=['GET'])
-# def getSimilarities():
-#     course_id = request.args.get('course_id')
-#     try:
-#         response = loadDataFromFile(course_id)
-#         # print(response)
-#     except:
-#         print('Get Similarities Error!')
-#     return jsonify(response)
+@app.route('/api/getSimilarities', methods=['GET'])
+def getSimilarities():
+    course_id = request.args.get('course_id')
+    try:
+        response = loadDataFromFile(course_id)
+        # print(response)
+    except:
+        print('Get Similarities Error!')
+    return jsonify(response)
 
 
 @app.route('/api/searchOnlyKeyword', methods=['POST'])
