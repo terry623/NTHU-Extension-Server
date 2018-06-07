@@ -37,7 +37,7 @@ def nearest_positive(items, pivot):
     close = date(2020, 1, 1)
     for n in items:
         gap = n - pivot
-        if n <= close and gap.days >= 0:
+        if n <= close and gap.days > 0:
             close = n
     return close
 
