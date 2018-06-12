@@ -9,7 +9,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
-
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
     year = request.args.get('year')
