@@ -2,13 +2,13 @@ import certifi
 from elasticsearch import Elasticsearch
 
 client = Elasticsearch(
-    ['https://search-nthu-course-w2xlrcsccvfh6tzuu5jgoccxb4.us-east-1.es.amazonaws.com/'], use_ssl=True, ca_certs=certifi.where())
+    ['http://192.168.99.100:9200/'], use_ssl=True, ca_certs=certifi.where())
 
 
 def toSearchOnlyKeyword(search_topic, keyword):
     print("search_topic:", search_topic, "keyword:", keyword)
     response = client.search(
-        index="nthu",
+        index="nthu2",
         body={
             "size": 50,
             "query": {
@@ -20,8 +20,8 @@ def toSearchOnlyKeyword(search_topic, keyword):
             }
         }
     )
-    # for hit in response['hits']['hits']:
-    #     print(hit['_source']['課程中文名稱'])
+    for hit in response['hits']['hits']:
+        print(hit['_source']['課程中文名稱'])
     return response
 
 
@@ -34,7 +34,7 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
         match_special = {"match": {"課程中文名稱": keyword}}
 
     response = client.search(
-        index="nthu",
+        index="nthu2",
         body={
             "size": 50,
             "query": {
@@ -83,7 +83,7 @@ def toSearchTime(search_topic, keyword, time_group):
             should_group.append(each_match)
 
     response = client.search(
-        index="nthu",
+        index="nthu2",
         body={
             "size": 50,
             "query": {
@@ -106,7 +106,7 @@ def toSearchTime(search_topic, keyword, time_group):
 def toSearchBySingleCourseNo(course_no):
     print("course_no:", course_no)
     response = client.search(
-        index="nthu",
+        index="nthu2",
         body={
             "query": {
                 "bool": {
@@ -125,7 +125,7 @@ def toSearchBySingleCourseNo(course_no):
 def toSearchByID_Group(id_0, id_1, id_2):
     print("id_0:", id_0, "id_1:", id_1, "id_2:", id_2)
     response = client.search(
-        index="nthu",
+        index="nthu2",
         body={
             "query": {
                 "terms": {
