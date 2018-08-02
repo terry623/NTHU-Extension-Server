@@ -1,8 +1,7 @@
 import certifi
 from elasticsearch import Elasticsearch
 
-client = Elasticsearch(
-    ['http://192.168.99.100:9200/'], use_ssl=True, ca_certs=certifi.where())
+client = Elasticsearch(['localhost:9200/'])
 
 
 def toSearchOnlyKeyword(search_topic, keyword):
