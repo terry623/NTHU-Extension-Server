@@ -19,8 +19,8 @@ def toSearchOnlyKeyword(search_topic, keyword):
             }
         }
     )
-    for hit in response['hits']['hits']:
-        print(hit['_source']['課程中文名稱'])
+    # for hit in response['hits']['hits']:
+    #     print(hit['_source']['課程中文名稱'])
     return response
 
 
