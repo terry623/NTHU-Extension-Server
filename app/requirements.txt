@@ -6,3 +6,4 @@ certifi
 numpy
 pandas
 requests
+pymongo

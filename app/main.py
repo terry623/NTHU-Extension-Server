@@ -5,6 +5,7 @@ from datetime import date
 from backend.models import loadDataFromFile
 from backend.search import toSearchOnlyKeyword, toSearchDoubleKeyword, toSearchBySingleCourseNo, toSearchByID_Group, toSearchTime
 from backend.days import getCountDown, getCurrentPhase
+from backend.save import toSaveUserGrade
 from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, resources={'/api/*': {'origins': '*'}})
@@ -42,10 +43,11 @@ def getSimilarities():
 
 @app.route('/api/searchOnlyKeyword', methods=['POST'])
 def searchOnlyKeyword():
+    stu_no = request.form['stu_no']
     search_topic = request.form['search_topic']
     keyword = request.form['keyword']
     try:
-        response = toSearchOnlyKeyword(search_topic, keyword)
+        response = toSearchOnlyKeyword(stu_no, search_topic, keyword)
         # print(response)
     except:
         print('Search Only Keyword Error!')
@@ -54,11 +56,14 @@ def searchOnlyKeyword():
 
 @app.route('/api/searchDoubleKeyword', methods=['POST'])
 def searchDoubleKeyword():
+    stu_no = request.form['stu_no']
     search_topic = request.form['search_topic']
     keyword = request.form['keyword']
     other_keyword = request.form['other_keyword']
     try:
-        response = toSearchDoubleKeyword(search_topic, keyword, other_keyword)
+        response = toSearchDoubleKeyword(
+            stu_no, search_topic, keyword, other_keyword)
+            stu_no, search_topic, keyword, other_keyword)
         # print(response)
     except:
         print('Search Double Keyword Error!')
@@ -111,9 +116,7 @@ def saveUserGrade():
     print(stu_no)
     print(userGrade)
     try:
-        response = {
-            'message': 'Not yet finish !',
-        }
+        response = toSaveUserGrade(stu_no, userGrade)
     except:
         print('Save User Grade Error!')
     return jsonify(response)
