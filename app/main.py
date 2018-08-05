@@ -9,6 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, resources={'/api/*': {'origins': '*'}})
 
+
 @app.route('/api/getCurrentStateOfNTHU', methods=['GET'])
 def getCurrentStateOfNTHU():
     year = request.args.get('year')
@@ -100,6 +101,21 @@ def searchByID_Group():
         # print(response)
     except:
         print('Search By ID Group Error!')
+    return jsonify(response)
+
+
+@app.route('/api/saveUserGrade', methods=['POST'])
+def saveUserGrade():
+    stu_no = request.form['stu_no']
+    userGrade = json.loads(request.form['userGrade'])
+    print(stu_no)
+    print(userGrade)
+    try:
+        response = {
+            'message': 'Not yet finish !',
+        }
+    except:
+        print('Save User Grade Error!')
     return jsonify(response)
 
 
