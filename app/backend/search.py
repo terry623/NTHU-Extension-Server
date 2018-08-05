@@ -6,7 +6,8 @@ client = Elasticsearch(['localhost:9200/'])
 
 
 def toSearchOnlyKeyword(stu_no, search_topic, keyword):
-    print("stu_no": stu_no, "search_topic:", search_topic, "keyword:", keyword)
+    print("stu_no:", stu_no, "search_topic:",
+          search_topic, "keyword:", keyword)
     response = client.search(
         index="nthu2",
         body={
@@ -27,7 +28,7 @@ def toSearchOnlyKeyword(stu_no, search_topic, keyword):
 
 
 def toSearchDoubleKeyword(stu_no, search_topic, keyword, other_keyword):
-    print("stu_no": stu_no, "search_topic:", search_topic, "keyword:",
+    print("stu_no:", stu_no, "search_topic:", search_topic, "keyword:",
           keyword, "other_keyword:", other_keyword)
 
     match_special = {"match_all": {}}

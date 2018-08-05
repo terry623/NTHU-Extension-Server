@@ -63,7 +63,6 @@ def searchDoubleKeyword():
     try:
         response = toSearchDoubleKeyword(
             stu_no, search_topic, keyword, other_keyword)
-            stu_no, search_topic, keyword, other_keyword)
         # print(response)
     except:
         print('Search Double Keyword Error!')

@@ -13,7 +13,7 @@ def toSaveUserGrade(stu_no, userGrade):
     return response
 
 
-def toSaveKeyword(stu_no, search_topic, keyword, other_keyword)
+def toSaveKeyword(stu_no, search_topic, keyword, other_keyword):
     resultID = keywords.insert_one(
         {'stu_no': stu_no, 'topic': search_topic, 'keyword': keyword, 'other_keyword': other_keyword}).inserted_id
     response = {'message': 'Save Keyword Success!'}
