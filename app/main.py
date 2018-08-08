@@ -126,8 +126,3 @@ def saveUserGrade():
 def catch_all(path):
     index_path = os.path.join(app.static_folder, 'index.html')
     return send_file(index_path)
-
-
-if __name__ == "__main__":
-    # Only for debugging while developing
-    app.run(host='0.0.0.0', debug=True, port=80)

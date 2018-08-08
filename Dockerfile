@@ -6,10 +6,10 @@ ENV FLASK_DEBUG=1
 
 COPY ./app /app
 
-EXPOSE 80
-
 WORKDIR /app
+
+EXPOSE 8080
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["flask","run","--port=80"]
+ENTRYPOINT ["flask","run","--host=0.0.0.0","--port=8080"]
