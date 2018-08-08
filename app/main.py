@@ -26,7 +26,9 @@ def getCurrentStateOfNTHU():
         }
         # print(response)
     except:
-        print('Get Current State Of NTHU Error!')
+        message = 'Get Current State Of NTHU Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -37,7 +39,9 @@ def getSimilarities():
         response = loadDataFromFile(course_id)
         # print(response)
     except:
-        print('Get Similarities Error!')
+        message = 'Get Similarities Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -50,7 +54,9 @@ def searchOnlyKeyword():
         response = toSearchOnlyKeyword(stu_no, search_topic, keyword)
         # print(response)
     except:
-        print('Search Only Keyword Error!')
+        message = 'Search Only Keyword Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -65,7 +71,9 @@ def searchDoubleKeyword():
             stu_no, search_topic, keyword, other_keyword)
         # print(response)
     except:
-        print('Search Double Keyword Error!')
+        message = 'Search Double Keyword Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -79,7 +87,9 @@ def searchTime():
         response = toSearchTime(search_topic, keyword, time_group)
         # print(response)
     except:
-        print('Search Time Error!')
+        message = 'Search Time Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -90,7 +100,9 @@ def searchBySingleCourseNo():
         response = toSearchBySingleCourseNo(course_no)
         # print(response)
     except:
-        print('Search By Single CourseNo Error!')
+        message = 'Search By Single CourseNo Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -104,7 +116,9 @@ def searchByID_Group():
         course_no = request.form['course_no']
         # print(response)
     except:
-        print('Search By ID Group Error!')
+        message = 'Search By ID Group Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 
@@ -117,7 +131,9 @@ def saveUserGrade():
     try:
         response = toSaveUserGrade(stu_no, userGrade)
     except:
-        print('Save User Grade Error!')
+        message = 'Save User Grade Error!'
+        print(message)
+        response = {'message': message}
     return jsonify(response)
 
 

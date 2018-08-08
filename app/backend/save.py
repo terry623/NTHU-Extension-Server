@@ -1,5 +1,9 @@
 from pymongo import MongoClient
-client = MongoClient('192.168.99.100:32768')
+import os
+account = os.environ["MONGO_ACCOUNT"]
+password = os.environ["MONGO_PASSWORD"]
+client = MongoClient('mongodb+srv://' + account + ':' + password +
+                     '@cluster0-hptar.gcp.mongodb.net/test?retryWrites=true')
 db = client.nthuCourse_database
 userGrades = db.userGrade_collection
 keywords = db.keyword_collection

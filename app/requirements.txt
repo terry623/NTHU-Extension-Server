@@ -7,3 +7,4 @@ certifi
 numpy
 requests
 pymongo
+dnspython
