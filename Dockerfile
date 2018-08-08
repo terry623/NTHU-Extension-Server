@@ -1,14 +1,15 @@
-FROM ubuntu:latest
+FROM python:latest
 
-RUN apt-get update -y
+ENV FLASK_APP=main.py
 
-RUN apt-get install -y python-pip python-dev build-essential
+ENV FLASK_DEBUG=1
 
 COPY ./app /app
+
+EXPOSE 80
 
 WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python"]
-CMD ["main.py"]
+ENTRYPOINT ["flask","run","--port=80"]
