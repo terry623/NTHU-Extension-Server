@@ -8,3 +8,6 @@ resources:
   disk_size_gb: 10
 health_check:
   enable_health_check: False
+env_variables:
+  MONGO_ACCOUNT: ""
+  MONGO_PASSWORD: ""
