@@ -1,12 +1,13 @@
 from pymongo import MongoClient
 import os
-account = os.environ["MONGO_ACCOUNT"]
-password = os.environ["MONGO_PASSWORD"]
+account = os.environ["MONGO_ROLE_ACCOUNT"]
+password = os.environ["MONGO_ROLE_PASSWORD"]
 client = MongoClient('mongodb+srv://' + account + ':' + password +
                      '@cluster0-hptar.gcp.mongodb.net/test?retryWrites=true')
-db = client.nthuCourse_database
-userGrades = db.userGrade_collection
-keywords = db.keyword_collection
+
+db = client['nthuCourse_database']
+userGrades = db['userGrade_collection']
+keywords = db['keyword_collection']
 
 
 def toSaveUserGrade(stu_no, userGrade):
