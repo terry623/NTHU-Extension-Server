@@ -2,7 +2,7 @@
 # from py2neo import Graph, Node, Relationship
 # from .graph import graph
 import pandas as pd
-storage = pd.read_pickle('data/course_similarities_10710')
+storage = pd.read_pickle('data/course_similarities_10710_0811')
 
 # class Course:
 #     def __init__(self, course_id):

@@ -33,15 +33,15 @@ mapping = {
         }
     }
 }
-req = requests.put('http://localhost:9200/nthu2', json=mapping)
+req = requests.put('http://localhost:9200/nthu3', json=mapping)
 print(req.json())
 
-d = pd.read_pickle('../data/open_course_data_with_syllabus_serialize_10710')
+d = pd.read_pickle('../data/open_course_data_with_syllabus_serialize_10710_0811')
 
 
 def index2elastic(idx, data):
     req = requests.put(
-        'http://localhost:9200/nthu2/course/' + str(idx), json=data)
+        'http://localhost:9200/nthu3/course/' + str(idx), json=data)
     print(idx, req.json()['result'])
 
 

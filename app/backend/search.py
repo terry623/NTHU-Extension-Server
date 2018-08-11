@@ -9,9 +9,9 @@ def toSearchOnlyKeyword(stu_no, search_topic, keyword):
     print("stu_no:", stu_no, "search_topic:",
           search_topic, "keyword:", keyword)
     response = client.search(
-        index="nthu2",
+        index="nthu3",
         body={
-            "size": 50,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
@@ -36,9 +36,9 @@ def toSearchDoubleKeyword(stu_no, search_topic, keyword, other_keyword):
         match_special = {"match": {"課程中文名稱": keyword}}
 
     response = client.search(
-        index="nthu2",
+        index="nthu3",
         body={
-            "size": 50,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
@@ -86,9 +86,9 @@ def toSearchTime(search_topic, keyword, time_group):
             should_group.append(each_match)
 
     response = client.search(
-        index="nthu2",
+        index="nthu3",
         body={
-            "size": 50,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
@@ -109,7 +109,7 @@ def toSearchTime(search_topic, keyword, time_group):
 def toSearchBySingleCourseNo(course_no):
     print("course_no:", course_no)
     response = client.search(
-        index="nthu2",
+        index="nthu3",
         body={
             "query": {
                 "bool": {
@@ -128,7 +128,7 @@ def toSearchBySingleCourseNo(course_no):
 def toSearchByID_Group(id_0, id_1, id_2):
     print("id_0:", id_0, "id_1:", id_1, "id_2:", id_2)
     response = client.search(
-        index="nthu2",
+        index="nthu3",
         body={
             "query": {
                 "terms": {
