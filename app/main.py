@@ -113,7 +113,6 @@ def searchByID_Group():
     id_2 = request.form['id_2']
     try:
         response = toSearchByID_Group(id_0, id_1, id_2)
-        course_no = request.form['course_no']
         # print(response)
     except:
         message = 'Search By ID Group Error!'
