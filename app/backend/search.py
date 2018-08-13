@@ -10,7 +10,7 @@ def toSearchOnlyKeyword(search_topic, keyword):
     response = client.search(
         index="nthu3",
         body={
-            "size": 120,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
@@ -36,7 +36,7 @@ def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
     response = client.search(
         index="nthu3",
         body={
-            "size": 120,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
@@ -86,7 +86,7 @@ def toSearchTime(search_topic, keyword, time_group):
     response = client.search(
         index="nthu3",
         body={
-            "size": 120,
+            "size": 100,
             "query": {
                 "bool": {
                     "must": [
