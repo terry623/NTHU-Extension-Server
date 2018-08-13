@@ -5,13 +5,12 @@ from backend.save import toSaveKeyword
 client = Elasticsearch(['localhost:9200/'])
 
 
-def toSearchOnlyKeyword(stu_no, search_topic, keyword):
-    print("stu_no:", stu_no, "search_topic:",
-          search_topic, "keyword:", keyword)
+def toSearchOnlyKeyword(search_topic, keyword):
+    print("search_topic:", search_topic, "keyword:", keyword)
     response = client.search(
         index="nthu3",
         body={
-            "size": 100,
+            "size": 120,
             "query": {
                 "bool": {
                     "must": [
@@ -23,13 +22,12 @@ def toSearchOnlyKeyword(stu_no, search_topic, keyword):
     )
     # for hit in response['hits']['hits']:
     #     print(hit['_source']['課程中文名稱'])
-    toSaveKeyword(stu_no, search_topic, keyword, '')
+    toSaveKeyword(search_topic, keyword, '')
     return response
 
 
-def toSearchDoubleKeyword(stu_no, search_topic, keyword, other_keyword):
-    print("stu_no:", stu_no, "search_topic:", search_topic, "keyword:",
-          keyword, "other_keyword:", other_keyword)
+def toSearchDoubleKeyword(search_topic, keyword, other_keyword):
+    print("search_topic:", search_topic, "keyword:", keyword, "other_keyword:", other_keyword)
 
     match_special = {"match_all": {}}
     if(keyword != ""):
@@ -38,7 +36,7 @@ def toSearchDoubleKeyword(stu_no, search_topic, keyword, other_keyword):
     response = client.search(
         index="nthu3",
         body={
-            "size": 100,
+            "size": 120,
             "query": {
                 "bool": {
                     "must": [
@@ -51,7 +49,7 @@ def toSearchDoubleKeyword(stu_no, search_topic, keyword, other_keyword):
     )
     # for hit in response['hits']['hits']:
     #     print(hit['_source']['課程中文名稱'])
-    toSaveKeyword(stu_no, search_topic, keyword, other_keyword)
+    toSaveKeyword(search_topic, keyword, other_keyword)
     return response
 
 
@@ -88,7 +86,7 @@ def toSearchTime(search_topic, keyword, time_group):
     response = client.search(
         index="nthu3",
         body={
-            "size": 100,
+            "size": 120,
             "query": {
                 "bool": {
                     "must": [

@@ -47,11 +47,10 @@ def getSimilarities():
 
 @app.route('/api/searchOnlyKeyword', methods=['POST'])
 def searchOnlyKeyword():
-    stu_no = request.form['stu_no']
     search_topic = request.form['search_topic']
     keyword = request.form['keyword']
     try:
-        response = toSearchOnlyKeyword(stu_no, search_topic, keyword)
+        response = toSearchOnlyKeyword(search_topic, keyword)
         # print(response)
     except:
         message = 'Search Only Keyword Error!'
@@ -62,13 +61,11 @@ def searchOnlyKeyword():
 
 @app.route('/api/searchDoubleKeyword', methods=['POST'])
 def searchDoubleKeyword():
-    stu_no = request.form['stu_no']
     search_topic = request.form['search_topic']
     keyword = request.form['keyword']
     other_keyword = request.form['other_keyword']
     try:
-        response = toSearchDoubleKeyword(
-            stu_no, search_topic, keyword, other_keyword)
+        response = toSearchDoubleKeyword(search_topic, keyword, other_keyword)
         # print(response)
     except:
         message = 'Search Double Keyword Error!'
@@ -123,12 +120,10 @@ def searchByID_Group():
 
 @app.route('/api/saveUserGrade', methods=['POST'])
 def saveUserGrade():
-    stu_no = request.form['stu_no']
     userGrade = json.loads(request.form['userGrade'])
-    print(stu_no)
     print(userGrade)
     try:
-        response = toSaveUserGrade(stu_no, userGrade)
+        response = toSaveUserGrade(userGrade)
     except:
         message = 'Save User Grade Error!'
         print(message)

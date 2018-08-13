@@ -10,17 +10,16 @@ userGrades = db['userGrade_collection']
 keywords = db['keyword_collection']
 
 
-def toSaveUserGrade(stu_no, userGrade):
-    resultID = userGrades.insert_one(
-        {'stu_no': stu_no, 'userGrade': userGrade}).inserted_id
+def toSaveUserGrade(userGrade):
+    resultID = userGrades.insert_one({'userGrade': userGrade}).inserted_id
     response = {'message': 'Save Grade Success!'}
 
     return response
 
 
-def toSaveKeyword(stu_no, search_topic, keyword, other_keyword):
+def toSaveKeyword(search_topic, keyword, other_keyword):
     resultID = keywords.insert_one(
-        {'stu_no': stu_no, 'topic': search_topic, 'keyword': keyword, 'other_keyword': other_keyword}).inserted_id
+        {'topic': search_topic, 'keyword': keyword, 'other_keyword': other_keyword}).inserted_id
     response = {'message': 'Save Keyword Success!'}
 
     return response
